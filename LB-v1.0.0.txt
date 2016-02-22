@@ -1,0 +1,55 @@
+DEVICE: Sony Xperia Tablet Z - 4.2.2 - API 17 - 1920x1200 4.2.2
+SCREEN_SIZE: 960x600
+
+Var #ending_color_L = 100
+Var #ending_color_R = 100
+
+:start
+toast Start  LR
+// Click to start LR
+touchDown 0 369 530
+sleep 98
+touchUp 0
+sleep 2034
+toast Confirm
+touchDown 0 571 396
+sleep 102
+touchUp 0
+sleep 500000
+toast Prepare to end
+
+goto :checking_label
+
+// After 500 seconds ( around round 55 ) start to check for ending of LR
+:checking_label
+toast Checking for ending of LR
+getColorGray #ending_color_L 387 248
+getColorGray #ending_color_R 571 245
+toast ending_color_L :#ending_color_L   ending_color_R: #ending_color_R
+if #ending_color_R > -2 and #ending_color_R < 1 and #ending_color_L > -2 and #ending_color_L < 1
+  goto :ending_label
+else
+  sleep 10000
+  goto :checking_label
+endif
+
+
+// Confirm the end
+:ending_label
+  toast END detected.
+  sleep 5
+  touchDown 0 481 410
+  sleep 52
+  touchUp 0
+  sleep 8000
+  toast  Confirm to END
+  touchDown 0 575 463
+  sleep 87
+  touchUp 0
+  sleep 6000
+  touchDown 0 533 433
+  sleep 129
+  touchUp 0
+  goto :end
+
+:end
