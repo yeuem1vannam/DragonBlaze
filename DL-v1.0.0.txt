@@ -1,0 +1,62 @@
+DEVICE: Sony Xperia Tablet Z - 4.2.2 - API 17 - 1920x1200 4.2.2
+SCREEN_SIZE: 960x600
+
+Var #cor_L
+Var #cor_R
+Var #cor_mon_L 325
+Var #cor_mon_R 204 
+Var #open_mon_L
+Var #open_mon_R
+
+:start
+sleep 1000
+
+// Check open for monday
+getColorGray #open_mon_L 302 159
+getColorGray #open_mon_R 311 155
+toast open_mon_L: #open_mon_L open_mon_R: #open_mon_R
+
+// Monday: Llywelyn
+if #open_mon_L > -12 and #open_mon_L < -8 and #open_mon_R > 142 and #open_mon_R < 147 
+  Set #cor_L #cor_mon_L
+  Set #cor_R #cor_mon_R
+  goto :perform
+endif
+
+// TODO: Checking for other day here.
+
+// Fallback openning stage checking
+:openning_stage_check_failed
+  toast Cannot detect opening stage. Re-checking
+  // TODO: Checking in maximum n-times
+  sleep 5000
+  goto :start
+
+
+:perform
+  toast Start Daily Dungeon
+  touchDown 0 #cor_L #cor_R
+  sleep 122
+  touchUp 0
+  sleep 1394
+  touchDown 0 607 563
+  sleep 135
+  touchUp 0
+  goto :wait_for_completion
+
+:wait_for_completion
+  // Wait for complete
+  toast Wait for complete this round
+  sleep 45000
+  toast Call ally
+  touchDown 0 448 47
+  sleep 191
+  touchUp 0
+
+// Wait for complete last stage
+sleep 10000
+
+toast Finishing this round.
+sleep 5000
+
+:end
