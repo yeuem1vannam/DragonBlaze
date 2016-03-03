@@ -1,0 +1,86 @@
+// DEVICE: Sony Xperia Tablet Z - 4.2.2 - API 17 - 1920x1200
+// SCREEN_SIZE: 960x600, 120dpi
+
+Var #start_x 394
+Var #start_y 494
+
+Var #ok_x 598
+Var #ok_y 380
+
+Var #run_labyrinth_time 660000
+
+Var #character_hp_x 24
+Var #character_hp_y 98
+Var #character_hp 0
+Var #character_hp_color 0
+
+Var #try_again_x 425
+Var #try_again_y 436
+Var #try_again 0
+Var #try_again_color 403083
+
+Var #try_again_color_clicked 135224
+
+:start
+
+toast Start
+touchDown 0 #start_x #start_y
+sleep 100
+touchUp 0
+
+sleep 2000
+
+toast OK
+touchDown 0 #ok_x #ok_y
+sleep 100
+touchUp 0
+
+:run_labyrinth
+
+sleep #run_labyrinth_time
+
+goto :check_labyrinth_end
+
+:check_labyrinth_end
+  toast Check Labyrinth End
+  getColor #character_hp #character_hp_x #character_hp_y
+  if #character_hp == #character_hp_color
+    toast Character HP 0
+    touchDown 0 #character_hp_x #character_hp_y
+    sleep 100
+    touchUp 0
+
+    sleep 2000
+
+    getColor #try_again #try_again_x #try_again_y
+    if #try_again == #try_again_color
+      toast Try Again
+      touchDown 0 #try_again_x #try_again_y
+      sleep 100
+      touchUp 0
+
+      sleep 2000
+
+      getColor #try_again #try_again_x #try_again_y
+      if #try_again == #try_again_color_clicked
+        toast OK
+        touchDown 0 #ok_x #ok_y
+        sleep 100
+        touchUp 0
+
+        sleep 5000
+        goto :run_labyrinth
+      else
+        sleep 5000
+        goto :check_labyrinth_end
+      endif
+    else
+      sleep 5000
+      goto :check_labyrinth_end
+    endif
+  else
+    sleep 5000
+    goto :check_labyrinth_end
+  endif
+
+:end
