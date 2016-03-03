@@ -7,7 +7,9 @@ Var #start_y 494
 
 Var #ok_x 598
 Var #ok_y 380
-
+// Wait time
+// - 450s: round 50
+// - 660s: round 70
 Var #run_labyrinth_time 660000
 
 Var #character_hp_x 24
@@ -19,22 +21,20 @@ Var #try_again_x 425
 Var #try_again_y 436
 Var #try_again 0
 Var #try_again_color 403083
+// Var #try_again_color 136542
 
 Var #try_again_color_clicked 135224
+// Var #try_again_color_clicked -789515
 
 :start
 
 toast Start
-touchDown 0 #start_x #start_y
-sleep 100
-touchUp 0
+touchPress 0 #start_x #start_y
 
 sleep 2000
 
 toast OK
-touchDown 0 #ok_x #ok_y
-sleep 100
-touchUp 0
+touchPress 0 #ok_x #ok_y
 
 :run_labyrinth
 
@@ -45,29 +45,23 @@ sleep #run_labyrinth_time
 getColor #character_hp #character_hp_x #character_hp_y
 if #character_hp == #character_hp_color
   toast Check Labyrinth End
-  touchDown 0 #character_hp_x #character_hp_y
-  sleep 100
-  touchUp 0
+  touchPress 0 #character_hp_x #character_hp_y
 
   sleep 2000
 
   getColor #try_again #try_again_x #try_again_y
   if #try_again == #try_again_color
     toast Try Again
-    touchDown 0 #try_again_x #try_again_y
-    sleep 100
-    touchUp 0
+    touchPress 0 #try_again_x #try_again_y
 
-    sleep 2000
+    sleep 5000
 
     getColor #try_again #try_again_x #try_again_y
     if #try_again == #try_again_color_clicked
       toast OK
-      touchDown 0 #ok_x #ok_y
-      sleep 100
-      touchUp 0
+      touchPress 0 #ok_x #ok_y
 
-      sleep 5000
+      sleep 15000
       goto :run_labyrinth
     endif
   endif
