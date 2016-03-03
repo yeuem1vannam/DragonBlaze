@@ -1,5 +1,6 @@
 // DEVICE: Sony Xperia Tablet Z - 4.2.2 - API 17 - 1920x1200
 // SCREEN_SIZE: 960x600, 120dpi
+// Run script at start screen of Labyrinth
 
 Var #start_x 394
 Var #start_y 494
