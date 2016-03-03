@@ -71,17 +71,11 @@ goto :check_labyrinth_end
 
         sleep 5000
         goto :run_labyrinth
-      else
-        sleep 5000
-        goto :check_labyrinth_end
       endif
-    else
-      sleep 5000
-      goto :check_labyrinth_end
     endif
-  else
-    sleep 5000
-    goto :check_labyrinth_end
   endif
+  
+  sleep 5000
+  goto :check_labyrinth_end
 
 :end
