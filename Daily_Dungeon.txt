@@ -1,0 +1,137 @@
+// HiroMacro Auto-Touch Macro
+// Dragon Blaze Daily Dungeon Auto-Run Script
+// DEVICE: Sony Xperia Tablet Z - 4.2.2 - API 17 - 1920x1200
+// SCREEN_SIZE: 960x600, 120dpi
+// Run script at start screen of Daily Dungeon
+
+Var #today_x 0
+Var #today_y 0
+Var #today 0
+
+Var #locked_color 2171685
+
+Var #sunday_x 320
+Var #sunday_y 310
+
+Var #monday_x 320
+Var #monday_y 180
+
+Var #tuesday_x 428
+Var #tuesday_y 180
+
+Var #wednesday_x 535
+Var #wednesday_y 180
+
+Var #thursday_x 535
+Var #thursday_y 310
+
+Var #friday_x 643
+Var #friday_y 310
+
+Var #saturday_x 750
+Var #saturday_y 310
+
+Var #enter_x 670
+Var #enter_y 530
+
+Var #run_daily_dungeon_time 90000
+
+Var #check_x 25
+Var #check_y 100
+Var #check 0
+Var #check_color 4882079
+
+:start
+
+toast Check Today
+sleep 2000
+
+getColor #today #sunday_x #sunday_y
+if #today != #locked_color
+  toast Sunday
+  Set #today_x #sunday_x
+  Set #today_y #sunday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+getColor #today #monday_x #monday_y
+if #today != #locked_color
+  toast Monday
+  Set #today_x #monday_x
+  Set #today_y #monday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+getColor #today #tuesday_x #tuesday_y
+if #today != #locked_color
+  toast Tuesday
+  Set #today_x #tuesday_x
+  Set #today_y #tuesday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+getColor #today #wednesday_x #wednesday_y
+if #today != #locked_color
+  toast Wednesday
+  Set #today_x #wednesday_x
+  Set #today_y #wednesday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+getColor #today #thursday_x #thursday_y
+if #today != #locked_color
+  toast Thursday
+  Set #today_x #thursday_x
+  Set #today_y #thursday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+getColor #today #friday_x #friday_y
+if #today != #locked_color
+  toast Friday
+  Set #today_x #friday_x
+  Set #today_y #friday_y
+
+  sleep 2000
+  goto :run_daily_dungeon
+endif
+
+toast Saturday
+Set #today_x #saturday_x
+Set #today_y #saturday_y
+
+sleep 2000
+
+:run_daily_dungeon
+
+toast Run Daily Dungeon
+touchPress 0 #today_x #today_y
+
+sleep 2000
+
+toast Enter
+touchPress 0 #enter_x #enter_y
+
+sleep #run_daily_dungeon_time
+
+:check_daily_dungeon_end
+
+getColor #check #check_x #check_y
+if #check == #check_color
+  goto :run_daily_dungeon
+endif
+
+sleep 5000
+goto :check_daily_dungeon_end
+
+:end
