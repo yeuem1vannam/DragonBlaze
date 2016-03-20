@@ -126,6 +126,8 @@ sleep #run_daily_dungeon_time
 
 :check_daily_dungeon_end
 
+touchPress 0 #enter_x #enter_y
+
 getColor #check #check_x #check_y
 if #check == #check_color
   goto :run_daily_dungeon
